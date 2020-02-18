@@ -1,0 +1,325 @@
+/**
+ * @author Juergen Schwind
+ * @copyright Copyright (c), JBS New Media UG
+ * @package JBS New Media - Synchronize
+ * @link http://jbs-newmedia.de
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ *
+ */
+
+body {
+	background-color:#ccc;
+}
+
+table {
+	width:100%;
+	border:1px solid #eee;
+	border-spacing:1px;
+	border-collapse:separate;
+}
+
+table th {
+	background-color:#eee;
+	font-size:11px;
+	font-family:verdana;
+	padding:3px;
+	text-align:left;
+}
+
+table tr {
+	background-color:#fff;
+}
+
+table tr.node:hover {
+	background-color:#FFF7EF;
+	}
+
+table td {
+	font-size:11px;
+	font-family:verdana;
+	padding:3px;
+}
+
+table tr.header td .project_logo,
+table tr.header td .project_name,
+table tr.header td .project_copyright {
+	height:32px;
+	line-height:32px;
+}
+
+table tr.header td .project_logo,
+table tr.header td .project_name {
+	float:left;
+}
+
+table tr.header td .project_copyright,
+table tr.option_project td .project_version	{
+	float:right;
+}
+
+table tr.header td .project_copyright a,
+table tr.option_project td .project_version a,
+table tr.update td a,
+td.node_sources a,
+tr.viewdiff_header a,
+tr.viewcode_header a {
+	text-decoration:none;
+	color:#CC061D;
+	cursor:pointer;
+}
+
+table tr.header td .project_copyright a:hover,
+table tr.option_project td .project_version a:hover,
+table tr.update td a:hover,
+td.node_viewdiff a:hover,
+td.node_viewcode a:hover,
+tr.viewdiff_header a:hover,
+tr.viewcode_header a:hover {
+	text-decoration:underline;
+}
+
+table tr.header td .project_name {
+	padding-left:6px;
+	font-size:16px;
+	color:#000;
+}
+
+table tr.option_project td .project_select,
+table tr.option_project td .project_version
+	{
+	font-size:11px;
+	color:#000;
+	line-height:22px;
+}
+
+table tr.option_project td .project_select {
+	font-weight:bold;
+}
+
+table tr.header td {
+	font-family:Verdana;
+}
+
+table #header {
+	line-height:32px;
+}
+
+span.side {
+	font-size:13px;
+	left:16px;
+	position:relative;
+}
+
+table th.node_sources,
+table td.node_sources,
+table th.node_skip,
+table td.node_skip,
+table th.node_master,
+table td.node_master,
+table th.node_slave,
+table td.node_slave	{
+	text-align:center;
+}
+
+th.node_status_short,
+td.node_status_short {
+	width:23px;
+	text-align:center;
+	font-weight:bold;
+}
+
+th.node_resources,
+td.node_resources {
+	
+}
+
+th.node_sources,
+td.node_sources {
+	width:100px;
+}
+
+th.node_skip,
+td.node_skip {
+	width:80px;
+}
+
+th.node_master,
+td.node_master,
+th.node_slave,
+td.node_slave {
+	width:120px;
+}
+
+th.node_localtime,
+td.node_localtime,
+th.node_remotetime,
+td.node_remotetime {
+	width:140px;
+}
+
+th.node_status,
+td.node_status {
+	width:140px;
+}
+
+td.create {
+	background-color:#60b4f7;
+	color:#000;
+}
+
+td.update {
+	background-color:#add8e6;
+	color:#000;
+}
+
+td.delete {
+	background-color:#f00;
+	color:#fff;
+}
+
+td.skip {
+	background-color:#fff9dd;
+	color:#000;
+}
+
+.node_header {
+	
+}
+
+.left {
+	float:left;
+}
+
+.right {
+	float:right;
+}
+
+#loader {
+	height:100%;
+	min-height:100%;
+	width:100%;
+	position:fixed;
+	top:0px;
+	left:0px;
+	background-color:#000;
+	opacity:0.8;
+}
+
+#loader div {
+	height:100%;
+	min-height:100%;
+	width:100%;
+	position:absolute;
+	top:50%;
+	left:0px;
+	text-align:center;
+	color:#ddd;
+	font-family:verdana;
+	font-weight:bold;
+	font-size:18px;
+	display:table-row;
+	vertical-align:middle;
+}
+
+span.viewdiff_header_stats {
+	color:#808080;
+}
+
+table#diff_container,
+table#code_container {
+	width:100%;
+	border-spacing:0;
+    border-collapse:collapse;
+}
+
+table#diff_container td.diff_container_left,
+table#code_container td.code_container_left {
+	width:1px;
+	border-right:3px solid #cdcdcd;
+}
+
+table#diff_container td.diff_container_left div,
+table#code_container td.code_container_left div {
+	text-align:right;
+	padding:0px 4px 0px 2px;
+	color:#808080;
+	white-space:pre;
+}
+
+table#diff_container td.diff_container_right,
+table#code_container td.code_container_right {
+	text-align:left;
+	padding-left:4px;
+	color:#000000;
+	white-space:pre;
+}
+
+/*	
+ *	finediff
+ *	http://www.raymondhill.net/finediff/
+ *	Copyright (c) Raymond Hill (http://raymondhill.net/)
+ */
+
+tr.viewdiff_content ins {
+	color:green;
+	background:#dfd;
+	text-decoration:none;
+}
+
+tr.viewdiff_content del {
+	color:red;
+	background:#fdd;
+	text-decoration:none;
+}
+
+tr.viewdiff_content ins.current,
+tr.viewdiff_content del.current {
+	color:blue;
+	background:#ddf;
+	text-decoration:none;
+}
+
+tr.viewdiff_content>p {
+	margin:0px;
+	border:1px solid #bcd;
+	border-bottom:none;
+	padding:1px 3px;
+	background:#def;
+	font:14px sans-serif;
+}
+
+tr.viewdiff_content>p+div {
+	margin:0;
+	padding:2px 0px 2px 2px;
+	border:1px solid #bcd;
+	border-top:none;
+}
+
+tr.viewdiff_content .pane {
+	margin:0px;
+	padding:0px;
+	border:0px;
+	width:100%;
+	min-height:30em;
+	overflow:auto;
+	font:12px monospace;
+}
+
+/*	
+ *	tablesorter
+ *	http://tablesorter.com
+ *	Copyright (c) Christian Bach (https://twitter.com/lovepeacenukes)
+ */
+
+table.tablesorter .header {
+	background:#eee url(../img/bg.gif) center right no-repeat;
+	cursor:pointer;
+}
+
+table.tablesorter .headerSortUp {
+	background-image:url(../img/asc.gif);
+}
+
+table.tablesorter .headerSortDown {
+	background-image:url(../img/desc.gif);
+}
