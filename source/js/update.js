@@ -1,3 +1,12 @@
+/**
+ * @author Juergen Schwind
+ * @copyright Copyright (c), JBS New Media GmbH
+ * @package JBS New Media - Synchronize
+ * @link https://jbs-newmedia.de
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ *
+ */
+
 function doUpdateAll(client, master, slave) {
 	out='';
 	if (client==1) {

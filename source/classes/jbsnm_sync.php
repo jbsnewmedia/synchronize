@@ -21,7 +21,7 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 
 	private $conf=array();
 
-	private $version_this='2.0.2';
+	private $version_this='2.0.3RC4';
 
 	private $version_this_release='stable';
 
