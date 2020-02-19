@@ -172,12 +172,12 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 		echo '<th colspan="1" class="node_status">Status</th>';
 		echo '</tr>';
 		echo '</thead>';
+		echo '<tbody>';
 		if ((JBSNM_Sync::getInstance()->getProject()!='')&&(JBSNM_Sync::getInstance()->getProjectConfValue('pass')!='')&&(JBSNM_Sync_Session::getInstance()->get(JBSNM_Sync::getInstance()->getProject().'_enabled')!==true)) {
 			echo '<tr class="blank">';
-			echo '<td>Password required, please enter password <input id="option_password" name="input_password" type="password" /> and press "Enter" or "Reload project"</td>';
+			echo '<td colspan="9">Password required, please enter password <input id="option_password" name="input_password" type="password" /> and press "Enter" or "Reload project"</td>';
 			echo '</tr>';
 		} else {
-			echo '<tbody>';
 			$i=0;
 			if ((JBSNM_Sync::getInstance()->getProject()!='')&&(JBSNM_Sync::getInstance()->getSyncTable()!==array())&&(JBSNM_Sync::getInstance()->getSyncTable()!==false)) {
 				foreach (JBSNM_Sync::getInstance()->getSyncTable() as $node=>$node_details) {
@@ -230,10 +230,10 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 				echo '<td colspan="9">---</td>';
 				echo '</tr>';
 			}
-			echo '</tbody>';
-			echo '</table>';
-			echo '<table>';
 		}
+		echo '</tbody>';
+		echo '</table>';
+		echo '<table>';
 		if (JBSNM_Sync::getInstance()->getProject()!='') {
 			echo '<tr colspan="2" class="blank">';
 			echo '<td colspan="2">&nbsp;</td>';
@@ -300,7 +300,7 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 			if ((strlen($release)<4)||(strlen($release)>6)) {
 				$release='stable';
 			}
-			if (JBSNM_Sync_Update::getInstance()->checkUpdate($version, JBSNM_Sync::getInstance()->getCurrentVersion($release))===true) {
+			if (($version!='0.0.0')&&(JBSNM_Sync_Update::getInstance()->checkUpdate($version, JBSNM_Sync::getInstance()->getCurrentVersion($release))===true)) {
 				$update_array['master']='1';
 				$update_count++;
 				$output_string='';
@@ -324,7 +324,7 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 			if ((strlen($release)<4)||(strlen($release)>6)) {
 				$release='stable';
 			}
-			if (JBSNM_Sync_Update::getInstance()->checkUpdate($version, JBSNM_Sync::getInstance()->getCurrentVersion($release))===true) {
+			if (($version!='0.0.0')&&(JBSNM_Sync_Update::getInstance()->checkUpdate($version, JBSNM_Sync::getInstance()->getCurrentVersion($release))===true)) {
 				$update_array['slave']='1';
 				$update_count++;
 				$output_string='';
