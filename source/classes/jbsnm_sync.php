@@ -21,9 +21,9 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 
 	private $conf=array();
 
-	private $version_this='2.0.3RC4';
+	private $version_this='2.0.3RC5';
 
-	private $version_this_release='stable';
+	private $version_this_release='beta';
 
 	private $version_current=array();
 
@@ -34,7 +34,7 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 	private $synclist=array();
 
 	function __construct() {
-		$this->setCurrentVersion();
+		$this->setCurrentVersion($this->version_this_release);
 	}
 
 	public function setProject($project) {
@@ -257,16 +257,26 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 	}
 
 	private function setCurrentVersion($release='stable') {
-		if ($release=='stable') {
-			$content=@file_get_contents('https://jbs-newmedia.de/getsynchronizeversion');
-		} else {
-			$content=@file_get_contents('https://jbs-newmedia.de/getsynchronizeversionbeta');
-		}
-		if ((strlen($content)>=4)&&(strlen($content)<=13)) {
-			$this->version_current[$release]=$content;
-		} else {
+		if ((!file_exists('./update.'.$release.'.version'))||(filemtime('./update.'.$release.'.version')<(time()-3600))) {
+			$options=array('http' => array('user_agent'=>'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'));
+			$context=stream_context_create($options);
+			$file='https://api.github.com/repos/jbs-newmedia/synchronize/releases';
+			$content=file_get_contents($file, false, $context);
+			$json=json_decode($content, true);
 			$this->version_current[$release]='0.0.0';
+			foreach ($json as $git) {
+				if (($release=='beta')&&($git['prerelease']===true)) {
+					$this->version_current[$release]=$git['tag_name'];
+				}
+				if (($release=='stable')&&($git['prerelease']===false)) {
+					$this->version_current[$release]=$git['tag_name'];
+				}
+			}
+			file_put_contents('./update.'.$release.'.version', $this->version_current[$release]);
+			return true;
 		}
+		$this->version_current[$release]=file_get_contents('./update.'.$release.'.version');
+		return true;
 	}
 
 	public function getCurrentVersion($release='stable') {

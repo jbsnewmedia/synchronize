@@ -15,13 +15,9 @@ class JBSNM_Sync_Update extends JBSNM_Sync_Object {
 		if ($this->checkUpdate()!==true) {
 			return false;
 		}
-
-		$filename=strtolower('synchronize-'.JBSNM_Sync::getInstance()->getCurrentVersion().'.zip');
-		if (JBSNM_Sync::getInstance()->getRelease()=='stable') {
-			file_put_contents($filename, file_get_contents('https://jbs-newmedia.de/getsynchronize'));
-		} else {
-			file_put_contents($filename, file_get_contents('https://jbs-newmedia.de/getsynchronizebeta'));
-		}
+		$currentversion=JBSNM_Sync::getInstance()->getCurrentVersion(JBSNM_Sync::getInstance()->getRelease());
+		$filename=strtolower('synchronize-'.$currentversion.'.zip');
+		file_put_contents($filename, file_get_contents('https://github.com/jbs-newmedia/synchronize/archive/'.$currentversion.'.zip'));
 		$this->unpackDir($filename, './');
 		unlink($filename);
 		if (file_exists('./update_custom.php')) {
@@ -45,6 +41,7 @@ class JBSNM_Sync_Update extends JBSNM_Sync_Object {
 	}
 
 	function unpackDir($file, $dir, $chmod_dir=0755, $chmod_file=0644) {
+		$currentversion=JBSNM_Sync::getInstance()->getCurrentVersion(JBSNM_Sync::getInstance()->getRelease());
 		$name=md5($file.'###'.$dir);
 		$data[$name]['zip']=new ZipArchive();
 		$data[$name]['zip']->open($file);
@@ -55,22 +52,26 @@ class JBSNM_Sync_Update extends JBSNM_Sync_Object {
 			chmod($dir, $chmod_dir);
 			for ($i=0; $i<$data[$name]['zip']->numFiles; $i++) {
 				$stat=$data[$name]['zip']->statIndex($i);
-				if (($stat['crc']==0)&&($stat['size']==0)) {
-					// dir
-					if (!is_dir($dir.$stat['name'])) {
-						mkdir($dir.$stat['name']);
+				if ('synchronize-'.$currentversion.'/source/'==substr($stat['name'], 0, strlen('synchronize-'.$currentversion.'/source/'))) {
+					$stat['name']=str_replace('synchronize-'.$currentversion.'/source/', '', $stat['name']);
+					if ($stat['name']!='') {
+						if (($stat['crc']==0)&&($stat['size']==0)) {
+							// dir
+							if (!is_dir($dir.$stat['name'])) {
+								mkdir($dir.$stat['name']);
+							}
+							chmod($dir.$stat['name'], $chmod_dir);
+						} else {
+							// file
+							$_data=$data[$name]['zip']->getFromIndex($i);
+							file_put_contents($dir.$stat['name'], $_data);
+							chmod($dir.$stat['name'], $chmod_file);
+						}
 					}
-					chmod($dir.$stat['name'], $chmod_dir);
-				} else {
-					// file
-					$_data=$data[$name]['zip']->getFromIndex($i);
-					file_put_contents($dir.$stat['name'], $_data);
-					chmod($dir.$stat['name'], $chmod_file);
 				}
 			}
 		}
 	}
-
 
 	/**
 	 *
