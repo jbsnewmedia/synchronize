@@ -21,7 +21,7 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 
 	private $conf=array();
 
-	private $version_this='2.0.3RC5';
+	private $version_this='2.0.3RC6';
 
 	private $version_this_release='beta';
 
@@ -260,7 +260,7 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 		if ((!file_exists('./update.'.$release.'.version'))||(filemtime('./update.'.$release.'.version')<(time()-3600))) {
 			$options=array('http' => array('user_agent'=>'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'));
 			$context=stream_context_create($options);
-			$file='https://api.github.com/repos/jbs-newmedia/synchronize/releases';
+			$file='https://jbs-newmedia.de/getsynchronizereleases';
 			$content=file_get_contents($file, false, $context);
 			$json=json_decode($content, true);
 			$this->version_current[$release]='0.0.0';

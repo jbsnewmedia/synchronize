@@ -17,7 +17,7 @@ class JBSNM_Sync_Update extends JBSNM_Sync_Object {
 		}
 		$currentversion=JBSNM_Sync::getInstance()->getCurrentVersion(JBSNM_Sync::getInstance()->getRelease());
 		$filename=strtolower('synchronize-'.$currentversion.'.zip');
-		file_put_contents($filename, file_get_contents('https://github.com/jbs-newmedia/synchronize/archive/'.$currentversion.'.zip'));
+		file_put_contents($filename, file_get_contents('https://jbs-newmedia.de/getsynchronizedownload?release='.$currentversion));
 		$this->unpackDir($filename, './');
 		unlink($filename);
 		if (file_exists('./update_custom.php')) {

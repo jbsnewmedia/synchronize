@@ -47,7 +47,7 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 		echo '<td>';
 		echo '<span class="project_logo"><a href="https://jbs-newmedia.de" target="_blank"><img src="img/jbs_logo.png" alt="jbs_newmedia logo" title="JBS New Media"></a></span>';
 		echo '<span class="project_name"><strong>JBS</strong> New Media - Synchronize</span>';
-		echo '<span class="project_copyright">Copyright: <a href="http://juergen-schwind.de" target="_blank">Juergen Schwind</a> - <a href="https://jbs-newmedia.de/synchronize" target="_blank">JBS New Media</a></span>';
+		echo '<span class="project_copyright">Copyright: <a href="https://juergen-schwind.de" target="_blank">Juergen Schwind</a> - <a href="https://jbs-newmedia.de/synchronize" target="_blank">JBS New Media GmbH</a></span>';
 		echo '</td>';
 		echo '</tr>';
 	}
@@ -280,11 +280,7 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 			$update_count++;
 			$output_string='';
 			$output_string.='Client: New version available ('.JBSNM_Sync::getInstance()->getVersion().' => '.JBSNM_Sync::getInstance()->getCurrentVersion(JBSNM_Sync::getInstance()->getRelease()).') [';
-			if (strstr(JBSNM_Sync::getInstance()->getVersion(), 'RC')) {
-				$output_string.='<a href="https://jbs-newmedia.de/getsynchronizebeta" target="_blank">Download</a>';
-			} else {
-				$output_string.='<a href="https://jbs-newmedia.de/getsynchronize" target="_blank">Download</a>';
-			}
+			$output_string.='<a href="https://jbs-newmedia.de/getsynchronizedownload" target="_blank">Download</a>';
 			if (file_exists(abs_path.'update.php')) {
 				$output_string.='|<a onclick="doUpdateClient()" target="_blank">Update</a>';
 			}
