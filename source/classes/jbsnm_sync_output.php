@@ -242,7 +242,7 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 			echo '<td colspan="2">Options</td>';
 			echo '</tr>';
 			echo '<tr class="option">';
-			echo '<td width="1%"><input onclick="updateSkipAll();updateStatus();" type="checkbox" name="chk_skipall" id="chk_skipall"/></td>';
+			echo '<td width="1%"><input onclick="updateSkipAll();updateStatus();" type="checkbox" name="chk_skipall" id="chk_skipall" checked="checked"/></td>';
 			echo '<td class="skipall">Skip all files</td>';
 			echo '</tr>';
 			echo '<tr class="option">';
@@ -264,6 +264,7 @@ class JBSNM_Sync_Output extends JBSNM_Sync_Object {
 			echo '<tr class="option">';
 			echo '<td colspan="2" class="sync"><button onclick="sync();" name="btn_sync" id="btn_sync" type="button" value="">Synchronize</button> <button onclick="selectproject();" name="btn_reload" id="btn_reload" type="button" value="">Reload project</button></td>';
 			echo '</tr>';
+			echo '<script>updateSkipAll();updateStatus();</script>';
 		}
 		$this->tablefooter();
 	}
