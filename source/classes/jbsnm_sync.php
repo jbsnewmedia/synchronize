@@ -6,7 +6,7 @@
  * @copyright Copyright (c), JBS New Media GmbH
  * @package JBS New Media - Synchronize
  * @link https://jbs-newmedia.de
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ * @license MIT License
  *
  */
 class JBSNM_Sync extends JBSNM_Sync_Object {
@@ -21,9 +21,9 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 
 	private $conf=array();
 
-	private $version_this='2.0.3';
+	private $version_this='2.0.3RC7';
 
-	private $version_this_release='stable';
+	private $version_this_release='beta';
 
 	private $version_current=array();
 

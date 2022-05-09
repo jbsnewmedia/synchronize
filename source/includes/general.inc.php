@@ -5,8 +5,8 @@
  * @author Juergen Schwind
  * @copyright Copyright (c), JBS New Media GmbH
  * @package JBS New Media - Synchronize
- * @link https://jbs-newmedia.de
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ * @link http://jbs-newmedia.de
+ * @license MIT License
  *
  */
 
@@ -15,7 +15,7 @@ date_default_timezone_set('Europe/Berlin');
 include abs_path.'includes/debuglib.inc.php';
 
 /* Autoloader */
-function __autoload($classname) {
+function autoloader($classname) {
 	$filename=abs_path.'classes/'.strtolower($classname).'.php';
 	if (file_exists($filename)) {
 		require $filename;
@@ -23,6 +23,8 @@ function __autoload($classname) {
 		JBSNM_Sync::getInstance()->finish('Class '.$classname.' not found at '.$filename);
 	}
 }
+
+spl_autoload_register('autoloader');
 
 # http://php.net/manual/de/function.utf8-decode.php#83051
 function _utf8_decode($string) {

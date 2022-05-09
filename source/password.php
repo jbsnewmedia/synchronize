@@ -5,8 +5,8 @@
  * @author Juergen Schwind
  * @copyright Copyright (c), JBS New Media GmbH
  * @package JBS New Media - Synchronize
- * @link https://jbs-newmedia.de
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ * @link http://jbs-newmedia.de
+ * @license MIT License
  *
  */
 $password='12345678';

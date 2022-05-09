@@ -6,7 +6,7 @@
  * @copyright Copyright (c), JBS New Media GmbH
  * @package JBS New Media - Synchronize
  * @link https://jbs-newmedia.de
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ * @license MIT License
  *
  */
 class JBSNM_Sync_Update extends JBSNM_Sync_Object {

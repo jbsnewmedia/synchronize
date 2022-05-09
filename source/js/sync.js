@@ -2,8 +2,8 @@
  * @author Juergen Schwind
  * @copyright Copyright (c), JBS New Media GmbH
  * @package JBS New Media - Synchronize
- * @link https://jbs-newmedia.de
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ * @link http://jbs-newmedia.de
+ * @license MIT License
  *
  */
 
@@ -107,9 +107,9 @@ function updateStatus() {
 	});
 	
 	$("#option_password").keydown(function(e) {
-		if (e.which == 13) {
-			selectproject();
-		}
+	    if (e.which == 13) {
+	        selectproject();
+	    }
 	});
 
 }

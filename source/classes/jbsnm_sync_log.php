@@ -6,7 +6,7 @@
  * @copyright Copyright (c), JBS New Media GmbH
  * @package JBS New Media - Synchronize
  * @link https://jbs-newmedia.de
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License
+ * @license MIT License
  *
  */
 class JBSNM_Sync_Log extends JBSNM_Sync_Object {
@@ -17,7 +17,6 @@ class JBSNM_Sync_Log extends JBSNM_Sync_Object {
 		}
 		$fp=fopen($file, 'a+');
 		ob_start();
-		print_a($data);
 		$out=ob_get_contents();
 		ob_end_clean();
 		fwrite($fp, '<div style="border:1px solid #000; background-color:#eee; width:100%; margin-bottom:10px; font-size:13px;"><div style="background-color:#ddd; font-size:15px; font-weight:bold; padding:5px;">'.date('Y.m.d H:i:s ').$header.'</div><div style="background-color:#eee; font-size:13px; padding:5px;"><pre>'.$out.'</pre></div></div>');
