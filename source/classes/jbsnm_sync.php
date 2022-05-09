@@ -21,9 +21,9 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 
 	private $conf=array();
 
-	private $version_this='2.0.3RC7';
+	private $version_this='2.0.4';
 
-	private $version_this_release='beta';
+	private $version_this_release='stable';
 
 	private $version_current=array();
 
@@ -528,14 +528,13 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 				$postdata['chunk_last']='1';
 			}
 
-
 			if ($side=='master') {
 				$data_check=json_decode(JBSNM_Sync::getInstance()->exec(JBSNM_Sync::getInstance()->getProjectConfValue('master').'index.php', $postdata), true);
 			} else {
 				$data_check=json_decode(JBSNM_Sync::getInstance()->exec(JBSNM_Sync::getInstance()->getProjectConfValue('slave').'index.php', $postdata), true);
 			}
 
-			if ($data_check['sha1']!=$data['sha1']) {
+			if (($data_check==null)||(!isset($data_check['sha1']))||($data==null)||(!isset($data['sha1']))||($data_check['sha1']!=$data['sha1'])) {
 				$postdata['sha1']=$data['sha1'];
 				$postdata['action']='setnodedata';
 				$postdata['sha1_file']=$data['sha1_file'];
