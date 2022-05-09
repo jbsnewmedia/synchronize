@@ -21,7 +21,7 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 
 	private $conf=array();
 
-	private $version_this='2.0.5RC1';
+	private $version_this='2.0.5RC2';
 
 	private $version_this_release='beta';
 
@@ -267,9 +267,11 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 			foreach ($json as $git) {
 				if (($release=='beta')&&($git['prerelease']===true)) {
 					$this->version_current[$release]=$git['tag_name'];
+					break;
 				}
 				if (($release=='stable')&&($git['prerelease']===false)) {
 					$this->version_current[$release]=$git['tag_name'];
+					break;
 				}
 			}
 			file_put_contents('./update.'.$release.'.version', $this->version_current[$release]);
@@ -465,6 +467,8 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
+
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		if ((strlen(JBSNM_Sync::getInstance()->getProjectConfValue('htuser'))>0)&&(strlen(JBSNM_Sync::getInstance()->getProjectConfValue('htpass'))>0)) {
 			curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -528,13 +532,14 @@ class JBSNM_Sync extends JBSNM_Sync_Object {
 				$postdata['chunk_last']='1';
 			}
 
+
 			if ($side=='master') {
 				$data_check=json_decode(JBSNM_Sync::getInstance()->exec(JBSNM_Sync::getInstance()->getProjectConfValue('master').'index.php', $postdata), true);
 			} else {
 				$data_check=json_decode(JBSNM_Sync::getInstance()->exec(JBSNM_Sync::getInstance()->getProjectConfValue('slave').'index.php', $postdata), true);
 			}
 
-			if (($data_check==null)||(!isset($data_check['sha1']))||($data==null)||(!isset($data['sha1']))||($data_check['sha1']!=$data['sha1'])) {
+			if ($data_check['sha1']!=$data['sha1']) {
 				$postdata['sha1']=$data['sha1'];
 				$postdata['action']='setnodedata';
 				$postdata['sha1_file']=$data['sha1_file'];
